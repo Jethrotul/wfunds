@@ -21,28 +21,33 @@ namespace Funds.Data
             modelBuilder.Entity<Fund>()
                 .HasKey(f => f.FundId);
 
+            modelBuilder.Entity<FundType>()
+               .HasKey(f => f.Name);
+
             modelBuilder.Entity<Fund>()
                 .HasOne(f => f.FundType)
                 .WithMany(f => f.Funds)
                 .HasForeignKey(f => f.FundTypeName);
 
-            modelBuilder.Entity<FundType>()
-                .HasKey(f => f.Name);
-
-
-            modelBuilder.Entity<FundType>()
+           modelBuilder.Entity<FundType>()
                 .HasData(
-                    new FundType { Name = "Activo" },
-                    new FundType { Name = "Pasivo" },
-                    new FundType { Name = "Híbrido" }
+                    new FundType { Name = "Active" },
+                    new FundType { Name = "Passive" },
+                    new FundType { Name = "Hybrid" }
                 );
-
 
             modelBuilder.Entity<Fund>()
                 .HasData(
-                    new Fund { FundId = 1, Name = "True value", Country = "España", FundTypeName = "Activo", Price = 850 },
-                    new Fund { FundId = 2, Name = "Cobas", Country = "España", FundTypeName = "Activo", Price = 1020 },
-                    new Fund { FundId = 3, Name = "Índice SP500", Country = "EE.UU", FundTypeName = "Pasivo", Price = 3500 }
+                    new Fund { 
+                        FundId = 1, 
+                        Isin = "ES0180792006", 
+                        Name = "True value FI", 
+                        Price = 16.31, 
+                        AReturn = 14.18, 
+                        A5Return = 11.74, 
+                        Manager = "Renta 4 Gestora" , 
+                        Category = "Renta variable", 
+                    }
                 );
         }
     }
